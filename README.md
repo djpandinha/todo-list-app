@@ -1,184 +1,184 @@
-# ✅ Todo List Application
+# ✅ Lista de Tarefas
 
-A beautiful, fully-featured todo list app with local storage persistence. Stay organized and productive!
+Uma aplicação de lista de tarefas bonita e completa com armazenamento local. Organize-se e seja mais produtivo!
 
-## ✨ Features
+## ✨ Recursos
 
-- ✅ **Add Tasks** - Create new tasks with ease
-- 🎯 **Priority Levels** - Set High, Medium, or Low priority for each task
-- 📅 **Due Dates** - Add optional due dates to your tasks
-- ✔️ **Mark Complete** - Check off tasks as you complete them
-- ✏️ **Edit Tasks** - Modify task descriptions, priority, and due dates
-- 🗑️ **Delete Tasks** - Remove tasks you no longer need
-- 🔍 **Filter Tasks** - View All, Active, or Completed tasks
-- 💾 **Local Storage** - All tasks are automatically saved to your browser
-- 📊 **Statistics** - See total, active, and completed task counts
-- 📱 **Responsive Design** - Works great on desktop, tablet, and mobile
-- 🎨 **Beautiful UI** - Modern gradient design with smooth animations
+- ✅ **Adicionar Tarefas** - Crie novas tarefas com facilidade
+- 🎯 **Níveis de Prioridade** - Configure Alta, Média ou Baixa prioridade para cada tarefa
+- 📅 **Datas de Vencimento** - Adicione prazos opcionais às suas tarefas
+- ✔️ **Marcar Concluído** - Marque tarefas como concluídas com um clique
+- ✏️ **Editar Tarefas** - Modifique descrição, prioridade e data de vencimento
+- 🗑️ **Deletar Tarefas** - Remova tarefas que não precisa mais
+- 🔍 **Filtrar Tarefas** - Visualize Todas, Ativas ou Concluídas
+- 💾 **Armazenamento Local** - Todas as tarefas são salvas automaticamente no navegador
+- 📊 **Estatísticas** - Veja contagem de tarefas totais, ativas e concluídas
+- 📱 **Design Responsivo** - Funciona perfeitamente em desktop, tablet e mobile
+- 🎨 **Interface Bonita** - Design moderno com gradientes e animações suaves
 
-## 🚀 How to Use
+## 🚀 Como Usar
 
 ### Online
-1. Visit your deployed version (if hosted)
-2. Or open `index.html` in your web browser
-3. Start adding tasks!
+1. Visite seu repositório no GitHub
+2. Abra o arquivo `index.html` no navegador
+3. Comece a organizar suas tarefas!
 
-### Locally
+### Localmente
 ```bash
-# Clone the repository
+# Clone o repositório
 git clone https://github.com/djpandinha/todo-list-app.git
 
-# Navigate to the folder
+# Navegue até a pasta
 cd todo-list-app
 
-# Open in your browser
-# Option 1: Double-click index.html
-# Option 2: Use a local server
+# Abra no navegador
+# Opção 1: Clique duas vezes no arquivo index.html
+# Opção 2: Use um servidor local
 python -m http.server 8000
-# Then open http://localhost:8000
+# Depois abra http://localhost:8000
 ```
 
-## 🎮 How It Works
+## 🎮 Como Funciona
 
-### Adding a Task
-1. Type your task in the input field
-2. Click "Add" or press Enter
-3. Your task appears in the list
+### Adicionando uma Tarefa
+1. Digite sua tarefa no campo de entrada
+2. Clique em "Adicionar" ou pressione Enter
+3. Sua tarefa aparecerá na lista
 
-### Managing Tasks
-- **Complete**: Click the checkbox to mark tasks as done
-- **Edit**: Click "Edit" to modify task details
-- **Delete**: Click "Delete" to remove a task
-- **Set Priority**: Choose High, Medium, or Low
-- **Add Due Date**: Set optional deadlines
+### Gerenciando Tarefas
+- **Concluir**: Clique na caixa de seleção para marcar como pronta
+- **Editar**: Clique em "Editar" para modificar os detalhes
+- **Deletar**: Clique em "Deletar" para remover a tarefa
+- **Definir Prioridade**: Escolha Alta, Média ou Baixa
+- **Adicionar Data de Vencimento**: Configure prazos opcionais
 
-### Filtering
-Use the filter buttons to view:
-- **All** - See all tasks
-- **Active** - Only incomplete tasks
-- **Completed** - Only finished tasks
-- **Priority** - Filter by High, Medium, or Low
+### Filtrando
+Use os botões de filtro para visualizar:
+- **Todas** - Veja todas as tarefas
+- **Ativas** - Apenas tarefas incompletas
+- **Concluídas** - Apenas tarefas finalizadas
+- **Prioridade** - Filtre por Alta, Média ou Baixa
 
-### Statistics
-The dashboard shows:
-- Total number of tasks
-- Number of active tasks
-- Number of completed tasks
+### Estatísticas
+O painel mostra:
+- Número total de tarefas
+- Número de tarefas ativas
+- Número de tarefas concluídas
 
-## 💾 Local Storage
+## 💾 Armazenamento Local
 
-Your tasks are automatically saved to your browser's local storage. This means:
-- ✅ Tasks persist even after you close the browser
-- ✅ No login required
-- ✅ Data stays on your device
-- ✅ No cloud storage needed
+Suas tarefas são salvas automaticamente no armazenamento local do navegador. Isso significa:
+- ✅ As tarefas persistem mesmo após fechar o navegador
+- ✅ Sem necessidade de login
+- ✅ Os dados ficam no seu dispositivo
+- ✅ Sem necessidade de armazenamento em nuvem
 
-**Note**: Each browser and device stores data separately. Clearing browser data will delete your tasks.
+**Nota**: Cada navegador e dispositivo armazena dados separadamente. Limpar os dados do navegador deletará suas tarefas.
 
-## 🛠️ Technologies Used
+## 🛠️ Tecnologias Utilizadas
 
-- **HTML5** - Structure
-- **CSS3** - Styling with gradients and animations
-- **Vanilla JavaScript** - All functionality
-- **Local Storage API** - Data persistence
+- **HTML5** - Estrutura
+- **CSS3** - Estilos com gradientes e animações
+- **JavaScript Vanilla** - Toda a funcionalidade
+- **Local Storage API** - Persistência de dados
 
-## 📁 File Structure
+## 📁 Estrutura de Arquivos
 
 ```
 todo-list-app/
-├── index.html          # Main HTML file
-├── todo.js             # JavaScript logic
-└── README.md           # This file
+├── index.html          # Arquivo HTML principal
+├── tarefas.js          # Lógica em JavaScript
+└── README.md           # Este arquivo
 ```
 
-## 🎨 Customization
+## 🎨 Personalizando
 
-### Change Colors
-Edit the gradient colors in `index.html`:
+### Mudar Cores
+Edite as cores do gradiente em `index.html`:
 ```css
 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 ```
 
-### Add More Priority Levels
-Modify the `<select>` in the modal and add new priority classes in CSS.
+### Adicionar Mais Níveis de Prioridade
+Modifique o `<select>` no modal e adicione novas classes de prioridade em CSS.
 
-### Extend Features
-The code is well-commented and easy to extend. Add features like:
-- Categories/Tags
-- Search functionality
-- Recurring tasks
-- Task descriptions
-- Notifications
+### Estender Funcionalidades
+O código é bem comentado e fácil de estender. Adicione recursos como:
+- Categorias/Tags
+- Busca
+- Tarefas recorrentes
+- Descrições de tarefas
+- Notificações
 
-## 📋 Task Properties
+## 📋 Propriedades da Tarefa
 
-Each task stores:
-- `id` - Unique identifier (timestamp)
-- `text` - Task description
-- `completed` - Completion status
-- `priority` - High, Medium, or Low
-- `dueDate` - Optional deadline
-- `createdAt` - Creation date
+Cada tarefa armazena:
+- `id` - Identificador único (timestamp)
+- `texto` - Descrição da tarefa
+- `concluida` - Status de conclusão
+- `prioridade` - Alta, Média ou Baixa
+- `dataVencimento` - Prazo opcional
+- `dataCriacao` - Data de criação
 
-## 🤖 Local Storage Structure
+## 🤖 Estrutura do Armazenamento Local
 
-Tasks are stored as JSON in browser local storage:
+As tarefas são armazenadas como JSON no armazenamento local:
 ```javascript
 {
-  "todos": [
+  "tarefas": [
     {
       "id": 1693478400000,
-      "text": "Buy groceries",
-      "completed": false,
-      "priority": "high",
-      "dueDate": "2024-09-15",
-      "createdAt": "8/31/2026"
+      "texto": "Comprar mantimentos",
+      "concluida": false,
+      "prioridade": "high",
+      "dataVencimento": "2024-09-15",
+      "dataCriacao": "31/08/2026"
     }
   ]
 }
 ```
 
-## 🌟 Tips & Tricks
+## 🌟 Dicas e Truques
 
-- Press **Enter** in the input field to quickly add tasks
-- Click outside the edit modal to close it
-- Sort by priority - high priority tasks appear first
-- Use due dates to stay on track
-- Regularly clear completed tasks to keep your list clean
+- Pressione **Enter** no campo de entrada para adicionar tarefas rapidamente
+- Clique fora do modal de edição para fechá-lo
+- Classifique por prioridade - tarefas de alta prioridade aparecem primeiro
+- Use datas de vencimento para se manter no prazo
+- Limpe regularmente as tarefas concluídas para manter sua lista organizada
 
-## 📱 Browser Support
+## 📱 Navegadores Compatíveis
 
 - ✅ Chrome/Chromium
 - ✅ Firefox
 - ✅ Safari
 - ✅ Edge
-- ✅ Mobile browsers
+- ✅ Navegadores móveis
 
-## 🚀 Future Enhancements
+## 🚀 Melhorias Futuras
 
-- [ ] Task search functionality
-- [ ] Categories/Tags system
-- [ ] Recurring tasks
-- [ ] Task notes/descriptions
-- [ ] Export to CSV/PDF
-- [ ] Dark mode
-- [ ] Drag & drop reordering
-- [ ] Sound notifications
-- [ ] Cloud sync option
-- [ ] Task history
+- [ ] Funcionalidade de busca
+- [ ] Sistema de categorias/tags
+- [ ] Tarefas recorrentes
+- [ ] Notas/descrições das tarefas
+- [ ] Exportar para CSV/PDF
+- [ ] Modo escuro
+- [ ] Reordenação com arrastar e soltar
+- [ ] Notificações sonoras
+- [ ] Sincronização em nuvem
+- [ ] Histórico de tarefas
 
-## 🐛 Known Issues
+## 🐛 Problemas Conhecidos
 
-None at the moment! If you find any issues, please report them.
+Nenhum no momento! Se encontrar algum problema, reporte-o.
 
-## 📝 License
+## 📝 Licença
 
-Free to use for personal and educational purposes.
+Livre para usar para fins pessoais e educacionais.
 
-## 👨‍💻 Developer
+## 👨‍💻 Desenvolvedor
 
-Created with ❤️ by [@djpandinha](https://github.com/djpandinha)
+Criado com ❤️ por [@djpandinha](https://github.com/djpandinha)
 
 ---
 
-**Get organized, stay productive! Start using your Todo List today! 🚀**
+**Organize-se, mantenha a produtividade! Comece a usar sua Lista de Tarefas hoje! 🚀**

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Lista de Tarefas - Pronto para Usar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .input-container input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .input-container input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-add {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-add:active {
+            transform: translateY(-1px);
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+
+        .todo-list {
+            list-style: none;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .todo-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .todo-item.completed {
+            opacity: 0.6;
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .todo-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .todo-text {
+            font-size: 1em;
+            color: #333;
+            word-break: break-word;
+        }
+
+        .todo-date {
+            font-size: 0.8em;
+            color: #999;
+        }
+
+        .todo-priority {
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .priority-high {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .priority-medium {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .priority-low {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .todo-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-delete {
+            padding: 6px 12px;
+            background: #ffebee;
+            color: #c62828;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.85em;
+        }
+
+        .btn-delete:hover {
+            background: #ef5350;
+            color: white;
+        }
+
+        .btn-edit {
+            padding: 6px 12px;
+            background: #e3f2fd;
+            color: #1976d2;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.85em;
+        }
+
+        .btn-edit:hover {
+            background: #42a5f5;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .empty-state-text {
+            font-size: 1.1em;
+        }
+
+        .clear-all-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ffebee;
+            color: #c62828;
+            border: 2px solid #ffcdd2;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .clear-all-btn:hover {
+            background: #ef5350;
+            color: white;
+            border-color: #ef5350;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-cancel {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background: #bdbdbd;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .title {
+                font-size: 2em;
+            }
+
+            .input-container {
+                flex-direction: column;
+            }
+
+            .btn-add {
+                width: 100%;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .filters {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">📝 Lista de Tarefas</h1>
+            <p class="subtitle">Organize-se e seja mais produtivo</p>
+        </div>
+
+        <div class="input-container">
+            <input 
+                type="text" 
+                id="todoInput" 
+                placeholder="Adicione uma nova tarefa..."
+                autocomplete="off"
+            >
+            <button class="btn-add" onclick="adicionarTarefa()">Adicionar</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-label">Total</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="activeCount">0</div>
+                <div class="stat-label">Ativas</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="completedCount">0</div>
+                <div class="stat-label">Concluídas</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filtrarTarefas('all')">Todas</button>
+            <button class="filter-btn" onclick="filtrarTarefas('active')">Ativas</button>
+            <button class="filter-btn" onclick="filtrarTarefas('completed')">Concluídas</button>
+            <button class="filter-btn" onclick="filtrarTarefas('high')">🔴 Alta</button>
+            <button class="filter-btn" onclick="filtrarTarefas('medium')">🟠 Média</button>
+            <button class="filter-btn" onclick="filtrarTarefas('low')">🟢 Baixa</button>
+        </div>
+
+        <ul class="todo-list" id="todoList"></ul>
+
+        <button class="clear-all-btn" onclick="limparConcluidas()">🗑️ Limpar Concluídas</button>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Editar Tarefa</h2>
+            <div class="form-group">
+                <label for="editText">Descrição da Tarefa</label>
+                <textarea id="editText" placeholder="Digite a descrição da tarefa..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="editPriority">Prioridade</label>
+                <select id="editPriority">
+                    <option value="low">Baixa</option>
+                    <option value="medium" selected>Média</option>
+                    <option value="high">Alta</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="editDueDate">Data de Vencimento (opcional)</label>
+                <input type="date" id="editDueDate">
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-save" onclick="salvarEdicao()">Salvar Alterações</button>
+                <button class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chave de armazenamento local
+        const CHAVE_ARMAZENAMENTO = 'tarefas';
+        let tarefas = [];
+        let filtroAtual = 'all';
+        let idEdicao = null;
+
+        // Carrega tarefas do localStorage quando a página carrega
+        window.addEventListener('load', () => {
+            carregarTarefas();
+            renderizarTarefas();
+            atualizarEstatisticas();
+            document.getElementById('todoInput').focus();
+        });
+
+        // Adiciona nova tarefa
+        function adicionarTarefa() {
+            const input = document.getElementById('todoInput');
+            const texto = input.value.trim();
+
+            if (!texto) {
+                alert('Por favor, digite uma tarefa!');
+                return;
+            }
+
+            const tarefa = {
+                id: Date.now(),
+                texto: texto,
+                concluida: false,
+                prioridade: 'medium',
+                dataVencimento: '',
+                dataCriacao: new Date().toLocaleDateString('pt-BR')
+            };
+
+            tarefas.push(tarefa);
+            salvarTarefas();
+            renderizarTarefas();
+            atualizarEstatisticas();
+            input.value = '';
+            input.focus();
+        }
+
+        // Deleta tarefa
+        function deletarTarefa(id) {
+            if (confirm('Tem certeza que deseja deletar esta tarefa?')) {
+                tarefas = tarefas.filter(tarefa => tarefa.id !== id);
+                salvarTarefas();
+                renderizarTarefas();
+                atualizarEstatisticas();
+            }
+        }
+
+        // Alterna conclusão da tarefa
+        function alternarTarefa(id) {
+            const tarefa = tarefas.find(t => t.id === id);
+            if (tarefa) {
+                tarefa.concluida = !tarefa.concluida;
+                salvarTarefas();
+                renderizarTarefas();
+                atualizarEstatisticas();
+            }
+        }
+
+        // Abre modal de edição
+        function abrirModalEdicao(id) {
+            idEdicao = id;
+            const tarefa = tarefas.find(t => t.id === id);
+            if (tarefa) {
+                document.getElementById('editText').value = tarefa.texto;
+                document.getElementById('editPriority').value = tarefa.prioridade;
+                document.getElementById('editDueDate').value = tarefa.dataVencimento;
+                document.getElementById('editModal').classList.add('show');
+            }
+        }
+
+        // Fecha modal de edição
+        function fecharModal() {
+            document.getElementById('editModal').classList.remove('show');
+            idEdicao = null;
+        }
+
+        // Salva edição da tarefa
+        function salvarEdicao() {
+            const tarefa = tarefas.find(t => t.id === idEdicao);
+            if (tarefa) {
+                tarefa.texto = document.getElementById('editText').value.trim();
+                tarefa.prioridade = document.getElementById('editPriority').value;
+                tarefa.dataVencimento = document.getElementById('editDueDate').value;
+
+                if (!tarefa.texto) {
+                    alert('A descrição da tarefa não pode estar vazia!');
+                    return;
+                }
+
+                salvarTarefas();
+                renderizarTarefas();
+                atualizarEstatisticas();
+                fecharModal();
+            }
+        }
+
+        // Filtra tarefas
+        function filtrarTarefas(filtro) {
+            filtroAtual = filtro;
+            
+            // Atualiza botão ativo
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderizarTarefas();
+        }
+
+        // Limpa tarefas concluídas
+        function limparConcluidas() {
+            if (confirm('Deletar todas as tarefas concluídas? Esta ação não pode ser desfeita!')) {
+                tarefas = tarefas.filter(tarefa => !tarefa.concluida);
+                salvarTarefas();
+                renderizarTarefas();
+                atualizarEstatisticas();
+            }
+        }
+
+        // Renderiza tarefas
+        function renderizarTarefas() {
+            const todoList = document.getElementById('todoList');
+            todoList.innerHTML = '';
+
+            let tarefasFiltradas = tarefas;
+
+            // Aplica filtro
+            switch (filtroAtual) {
+                case 'active':
+                    tarefasFiltradas = tarefas.filter(t => !t.concluida);
+                    break;
+                case 'completed':
+                    tarefasFiltradas = tarefas.filter(t => t.concluida);
+                    break;
+                case 'high':
+                    tarefasFiltradas = tarefas.filter(t => t.prioridade === 'high');
+                    break;
+                case 'medium':
+                    tarefasFiltradas = tarefas.filter(t => t.prioridade === 'medium');
+                    break;
+                case 'low':
+                    tarefasFiltradas = tarefas.filter(t => t.prioridade === 'low');
+                    break;
+            }
+
+            if (tarefasFiltradas.length === 0) {
+                todoList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <div class="empty-state-text">Nenhuma tarefa ainda. Adicione uma para começar!</div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Ordena por prioridade
+            const ordemPrioridade = { high: 1, medium: 2, low: 3 };
+            tarefasFiltradas.sort((a, b) => ordemPrioridade[a.prioridade] - ordemPrioridade[b.prioridade]);
+
+            tarefasFiltradas.forEach(tarefa => {
+                const li = document.createElement('li');
+                li.className = `todo-item ${tarefa.concluida ? 'completed' : ''}`;
+
+                const classePrioridade = `priority-${tarefa.prioridade}`;
+                const textoVencimento = tarefa.dataVencimento ? `<div class="todo-date">📅 ${tarefa.dataVencimento}</div>` : '';
+                
+                const textoPrioridade = tarefa.prioridade === 'high' ? 'Alta' : tarefa.prioridade === 'medium' ? 'Média' : 'Baixa';
+
+                li.innerHTML = `
+                    <input 
+                        type="checkbox" 
+                        class="checkbox" 
+                        ${tarefa.concluida ? 'checked' : ''}
+                        onchange="alternarTarefa(${tarefa.id})"
+                    >
+                    <div class="todo-content">
+                        <div class="todo-text">${escaparHTML(tarefa.texto)}</div>
+                        ${textoVencimento}
+                    </div>
+                    <div class="todo-priority ${classePrioridade}">
+                        ${textoPrioridade}
+                    </div>
+                    <div class="todo-actions">
+                        <button class="btn-edit" onclick="abrirModalEdicao(${tarefa.id})">Editar</button>
+                        <button class="btn-delete" onclick="deletarTarefa(${tarefa.id})">Deletar</button>
+                    </div>
+                `;
+
+                todoList.appendChild(li);
+            });
+        }
+
+        // Atualiza estatísticas
+        function atualizarEstatisticas() {
+            const total = tarefas.length;
+            const ativas = tarefas.filter(t => !t.concluida).length;
+            const concluidas = tarefas.filter(t => t.concluida).length;
+
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('activeCount').textContent = ativas;
+            document.getElementById('completedCount').textContent = concluidas;
+        }
+
+        // Salva tarefas no localStorage
+        function salvarTarefas() {
+            localStorage.setItem(CHAVE_ARMAZENAMENTO, JSON.stringify(tarefas));
+        }
+
+        // Carrega tarefas do localStorage
+        function carregarTarefas() {
+            const salvo = localStorage.getItem(CHAVE_ARMAZENAMENTO);
+            if (salvo) {
+                try {
+                    tarefas = JSON.parse(salvo);
+                } catch (e) {
+                    console.error('Erro ao carregar tarefas:', e);
+                    tarefas = [];
+                }
+            }
+        }
+
+        // Escapa HTML para prevenir XSS
+        function escaparHTML(texto) {
+            const mapa = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return texto.replace(/[&<>"']/g, m => mapa[m]);
+        }
+
+        // Permite pressionar Enter para adicionar tarefa
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && document.activeElement.id === 'todoInput') {
+                adicionarTarefa();
+            }
+        });
+
+        // Fecha modal ao clicar fora
+        document.getElementById('editModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'editModal') {
+                fecharModal();
+            }
+        });
+    </script>
+</body>
+</html>

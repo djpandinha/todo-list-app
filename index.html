@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📝 Todo List App</title>
+    <title>📝 Lista de Tarefas</title>
     <style>
         * {
             margin: 0;
@@ -459,18 +459,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="title">📝 Todo List</h1>
-            <p class="subtitle">Stay organized and productive</p>
+            <h1 class="title">📝 Lista de Tarefas</h1>
+            <p class="subtitle">Organize-se e seja mais produtivo</p>
         </div>
 
         <div class="input-container">
             <input 
                 type="text" 
                 id="todoInput" 
-                placeholder="Add a new task..."
+                placeholder="Adicione uma nova tarefa..."
                 autocomplete="off"
             >
-            <button class="btn-add" onclick="addTodo()">Add</button>
+            <button class="btn-add" onclick="adicionarTarefa()">Adicionar</button>
         </div>
 
         <div class="stats">
@@ -480,55 +480,55 @@
             </div>
             <div class="stat-item">
                 <div class="stat-number" id="activeCount">0</div>
-                <div class="stat-label">Active</div>
+                <div class="stat-label">Ativas</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number" id="completedCount">0</div>
-                <div class="stat-label">Completed</div>
+                <div class="stat-label">Concluídas</div>
             </div>
         </div>
 
         <div class="filters">
-            <button class="filter-btn active" onclick="filterTodos('all')">All</button>
-            <button class="filter-btn" onclick="filterTodos('active')">Active</button>
-            <button class="filter-btn" onclick="filterTodos('completed')">Completed</button>
-            <button class="filter-btn" onclick="filterTodos('high')">🔴 High</button>
-            <button class="filter-btn" onclick="filterTodos('medium')">🟠 Medium</button>
-            <button class="filter-btn" onclick="filterTodos('low')">🟢 Low</button>
+            <button class="filter-btn active" onclick="filtrarTarefas('all')">Todas</button>
+            <button class="filter-btn" onclick="filtrarTarefas('active')">Ativas</button>
+            <button class="filter-btn" onclick="filtrarTarefas('completed')">Concluídas</button>
+            <button class="filter-btn" onclick="filtrarTarefas('high')">🔴 Alta</button>
+            <button class="filter-btn" onclick="filtrarTarefas('medium')">🟠 Média</button>
+            <button class="filter-btn" onclick="filtrarTarefas('low')">🟢 Baixa</button>
         </div>
 
         <ul class="todo-list" id="todoList"></ul>
 
-        <button class="clear-all-btn" onclick="clearCompleted()">🗑️ Clear Completed</button>
+        <button class="clear-all-btn" onclick="limparConcluidas()">🗑️ Limpar Concluídas</button>
     </div>
 
-    <!-- Edit Modal -->
+    <!-- Modal de Edição -->
     <div class="modal" id="editModal">
         <div class="modal-content">
-            <h2 class="modal-title">Edit Task</h2>
+            <h2 class="modal-title">Editar Tarefa</h2>
             <div class="form-group">
-                <label for="editText">Task Description</label>
-                <textarea id="editText" placeholder="Enter task description..."></textarea>
+                <label for="editText">Descrição da Tarefa</label>
+                <textarea id="editText" placeholder="Digite a descrição da tarefa..."></textarea>
             </div>
             <div class="form-group">
-                <label for="editPriority">Priority</label>
+                <label for="editPriority">Prioridade</label>
                 <select id="editPriority">
-                    <option value="low">Low</option>
-                    <option value="medium" selected>Medium</option>
-                    <option value="high">High</option>
+                    <option value="low">Baixa</option>
+                    <option value="medium" selected>Média</option>
+                    <option value="high">Alta</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="editDueDate">Due Date (optional)</label>
+                <label for="editDueDate">Data de Vencimento (opcional)</label>
                 <input type="date" id="editDueDate">
             </div>
             <div class="modal-buttons">
-                <button class="btn-save" onclick="saveEdit()">Save Changes</button>
-                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-save" onclick="salvarEdicao()">Salvar Alterações</button>
+                <button class="btn-cancel" onclick="fecharModal()">Cancelar</button>
             </div>
         </div>
     </div>
 
-    <script src="todo.js"></script>
+    <script src="tarefas.js"></script>
 </body>
 </html>
